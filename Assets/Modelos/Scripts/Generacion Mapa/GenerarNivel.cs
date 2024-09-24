@@ -14,7 +14,7 @@ public class GenerarNivel : MonoBehaviour
     {
         GameObject CasillaMapa = new GameObject("CasillaMapa");
         Image ImagenHab = CasillaMapa.AddComponent<Image>();
-        ImagenHab.sprite = R.Habimagen;
+        ImagenHab.sprite = R.HabSprite;
         RectTransform rectTransform = ImagenHab.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(Nivel.Alto, Nivel.Ancho) * Nivel.EscalaIcon;
         rectTransform.position = R.Ubicacion * (Nivel.EscalaIcon * Nivel.Alto * Nivel.Escala + (Nivel.relleno * Nivel.Alto * Nivel.Escala));
@@ -95,7 +95,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(-1, 0) + hab.Ubicacion;
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Der"))
@@ -111,7 +111,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(1, 0) + hab.Ubicacion;
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
 
             if(!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
@@ -128,7 +128,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(0, 1) + hab.Ubicacion;
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Abajo"))
@@ -144,7 +144,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(0, -1) + hab.Ubicacion;
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Arriba"))
@@ -158,6 +158,68 @@ public class GenerarNivel : MonoBehaviour
         
     }
 
+    private void GenerarHabJefe()
+    {
+        float NumMax = 0;
+        Vector2 HabMasLejana = Vector2.zero;
+
+        foreach (Hab R in Nivel.Habs)
+        {
+            if (Mathf.Abs(R.Ubicacion.x) + Mathf.Abs(R.Ubicacion.y) >= NumMax)
+            {
+                NumMax = Mathf.Abs(R.Ubicacion.x) + Mathf.Abs(R.Ubicacion.y);
+                HabMasLejana = R.Ubicacion;
+            }
+
+        }
+
+        Hab HabJefe = new Hab();
+        HabJefe.HabSprite = Nivel.HabJefeIcon;
+        HabJefe.NumHab = 3;
+
+        //Izq
+        if (!RevisarSiExisteHab(HabMasLejana + new Vector2(-1, 0)))
+        {
+            if (!RevisarSiHabsAlrededorCrearonHabs(HabMasLejana + new Vector2(-1, 0), "Derecha"))
+            {
+                HabJefe.Ubicacion = HabMasLejana + new Vector2(-1, 0);
+            }
+        }
+
+        //Der
+        else if (!RevisarSiExisteHab(HabMasLejana + new Vector2(1, 0)))
+        {
+            if (!RevisarSiHabsAlrededorCrearonHabs(HabMasLejana + new Vector2(1, 0), "Izquierda"))
+            {
+                HabJefe.Ubicacion = HabMasLejana + new Vector2(1, 0);
+            }
+        }
+
+        //Arriba
+        else if (!RevisarSiExisteHab(HabMasLejana + new Vector2(0, 1)))
+        {
+            if (!RevisarSiHabsAlrededorCrearonHabs(HabMasLejana + new Vector2(0, 1), "Abajo"))
+            {
+                HabJefe.Ubicacion = HabMasLejana + new Vector2(0, 1);
+            }
+        }
+            
+        //Abajo
+        else if (!RevisarSiExisteHab(HabMasLejana + new Vector2(0, -1)))
+        {
+            if (!RevisarSiHabsAlrededorCrearonHabs(HabMasLejana + new Vector2(0, -1), "Arriba"))
+            {
+                HabJefe.Ubicacion = HabMasLejana + new Vector2(0, -1);
+            }
+        }
+             
+
+
+        PonerHabsEnMapa(HabJefe);
+    }
+
+
+
     private void Awake()
     {
         Nivel.HabDefaultIcon = HabVacia;
@@ -169,10 +231,12 @@ public class GenerarNivel : MonoBehaviour
     void Start()
     {
 
-
         Hab HabInicio = new Hab();
         HabInicio.Ubicacion = new Vector2(0, 0);
-        HabInicio.Habimagen = Nivel.HabActualIcon;
+        HabInicio.HabSprite = Nivel.HabActualIcon;
+        HabInicio.NumHab =0;
+
+        Jugador.HabActual = HabInicio;
 
         //Pone la habitacion inical
         PonerHabsEnMapa(HabInicio);
@@ -182,7 +246,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(-1, 0);
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Der"))
@@ -198,7 +262,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(1, 0);
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Izq"))
@@ -214,7 +278,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(0, 1);
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Abajo"))
@@ -230,7 +294,7 @@ public class GenerarNivel : MonoBehaviour
         {
             Hab nuevaHab = new Hab();
             nuevaHab.Ubicacion = new Vector2(0, -1);
-            nuevaHab.Habimagen = Nivel.HabDefaultIcon;
+            nuevaHab.HabSprite = Nivel.HabDefaultIcon;
             if (!RevisarSiExisteHab(nuevaHab.Ubicacion))
             {
                 if (!RevisarSiHabsAlrededorCrearonHabs(nuevaHab.Ubicacion, "Arriba"))
@@ -240,6 +304,8 @@ public class GenerarNivel : MonoBehaviour
                 }
             }
         }
+
+        GenerarHabJefe();
 
     }
 

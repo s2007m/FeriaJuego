@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Nivel
 {
@@ -13,7 +15,7 @@ public class Nivel
 
     public static float ProbGeneracionHab = .5f;
 
-    public static int LimiteHab = 6;
+    public static int LimiteHab = 5;
 
     public static Sprite HabJefeIcon;
     public static Sprite HabSinExplorarIcon;
@@ -21,13 +23,13 @@ public class Nivel
     public static Sprite HabActualIcon;
 
     public static List<Hab> Habs = new List<Hab>();
-    public static Hab HabActual;
+    
 }
 
 public class Hab
 {
     public int NumHab = 0;
     public Vector2 Ubicacion;
-    public Sprite Habimagen;
-
+    public Image Habimagen;
+    public Sprite HabSprite;
 }

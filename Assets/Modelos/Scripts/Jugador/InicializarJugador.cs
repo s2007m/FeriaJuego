@@ -8,6 +8,7 @@ public class InicializarJugador : MonoBehaviour
     public Animator JugadorAnim;
     public GameObject JugadorAtaque;
     public GameObject JugadorAtaqueExplosion;
+    public Transform JugadorTransform;
 
     void Start()
     {
@@ -15,5 +16,6 @@ public class InicializarJugador : MonoBehaviour
         Jugador.Anim = JugadorAnim;
         Jugador.Ataque = JugadorAtaque;
         Jugador.ExplosionAtaque = JugadorAtaqueExplosion;
+        Jugador.transform = JugadorTransform;
     }
 }
