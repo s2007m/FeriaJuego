@@ -34,8 +34,8 @@ public class MovimientoJugador : MonoBehaviour
     private void LateUpdate()
     {
         //la camaa sigue al jugador
-        Vector3 puntoPosicion = transform.position + new Vector3(0, 40, 0);
-        Vector3 nuevaPosicion = Vector3.MoveTowards(Jugador.Cam.transform.position, puntoPosicion, 50f * Time.deltaTime);
+        Vector3 puntoPosicion = transform.position + new Vector3(0, 50, 0);
+        Vector3 nuevaPosicion = Vector3.MoveTowards(Jugador.Cam.transform.position, puntoPosicion, 150f * Time.deltaTime);
         Jugador.Cam.transform.position = nuevaPosicion;
     }
 }
