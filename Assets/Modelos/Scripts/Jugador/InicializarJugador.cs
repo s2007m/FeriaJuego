@@ -10,6 +10,7 @@ public class InicializarJugador : MonoBehaviour
     public GameObject JugadorAtaqueExplosion;
     public Transform JugadorTransform;
 
+
     void Start()
     {
         Jugador.Cam = cam;
