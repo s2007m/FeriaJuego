@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Modelos/Scripts/Jugador/Puntos.cs.meta
+guid: cf4d4dde01b0b394dba5c8820fdf56e6
+========
+guid: ca7d13f550e4c634fb9964a791aa6eb4
+>>>>>>>> 6e88556b45790f5a934acee03b98b18aa88e7a99:Assets/Modelos/Scripts/EnemigoControl.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

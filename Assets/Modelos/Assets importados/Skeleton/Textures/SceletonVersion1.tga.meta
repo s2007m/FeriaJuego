@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Modelos/Assets importados/Skeleton/Textures/SceletonVersion1.tga.meta
 guid: 21779aef7abde9b488a8c75dcecc3b53
+========
+guid: b21edff3faed7d34894d57e9f3dabe51
+>>>>>>>> 6e88556b45790f5a934acee03b98b18aa88e7a99:Assets/Modelos/Skeleton/Textures/SceletonVersion2.tga.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
