@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7881277862467509199}
   - component: {fileID: 4392752966075501022}
   - component: {fileID: 1321562333263403158}
-  - component: {fileID: 6829977598291578607}
   m_Layer: 3
   m_Name: DefaultAttackPrefab
   m_TagString: Proyectil
@@ -148,16 +147,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae43aec6ce46174aaf5eb332000bab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6829977598291578607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513204398790273943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4d4dde01b0b394dba5c8820fdf56e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextoPts: {fileID: 0}
