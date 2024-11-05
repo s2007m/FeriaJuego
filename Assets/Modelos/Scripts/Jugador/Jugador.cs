@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering;
 
 
@@ -14,5 +15,6 @@ public static class Jugador
     public static Camera Cam;
     public static GameObject Ataque;
     public static GameObject ExplosionAtaque;
+    public static int pts = 0;
 
 }
